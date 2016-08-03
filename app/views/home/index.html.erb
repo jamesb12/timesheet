@@ -1,0 +1,31 @@
+<div id="title">
+<h1>Your Jobs</h1>
+</div>
+<h2 id="month">
+<%=link_to "<", date: @date.prev_month %>
+<%= @date.strftime("%B %Y") %>
+<%=link_to ">", date: @date.next_month %></h2>
+	<div id="articles">
+		<%= calendar @date do |date| %>
+			<%= date.day %>
+		<% end %>
+<div id="add-new-job">
+<div id="title">
+<h1>New Job</h1>
+</div>
+	<div class="field">
+		<%=label_tag :Customer %>
+		<%= text_field_tag :text %>
+		<%=label_tag :Project %>
+		<%= text_field_tag :text %>
+		<%=label_tag :Hours %>
+		<%= number_field_tag :number,params[:number], :step => 'any' %>
+	</div>
+	<div class="field">
+		<br />
+		<%= label_tag :description %>
+		<%= text_field_tag :text,params[:text], :id => 'describe' %>
+	</div>
+</div>
+
+
