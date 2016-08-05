@@ -1,0 +1,30 @@
+<div id="job-table">
+<table>
+<tr>
+	<th>Customer</th>
+	<th>Project</th>
+	<th>Hours</th>
+	<th>Description</th>	
+</tr>
+<% @counter = 1 %>
+<%-# this loop is bad code sry -%>
+<% (0..999).each do  |i| %>
+<% @counter= @counter + 1 %>
+<% @jobs = Job.find_by_id(@counter) %>
+<% if @jobs.blank? %>
+
+<% else %>
+	<tr>
+		<td><%= @jobs.customer %></td>
+		<td><%= @jobs.project %></td>
+		<td><%= @jobs.hours %></td>
+		<td><%= @jobs.description %></td>
+		<td><%= link_to 'Edit', edit_job_path(@jobs) %></td>
+        <td><%= link_to 'Destroy', @jobs, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	</tr>
+<% end %>
+<% end %>
+
+
+</table>
+</div>
