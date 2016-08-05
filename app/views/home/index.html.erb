@@ -1,6 +1,10 @@
 <div id="title">
 <h1>Your Jobs</h1>
 </div>
+
+
+
+
 <h2 id="month">
 <%=link_to "<", date: @date.prev_month %>
 <%= @date.strftime("%B %Y") %>
@@ -13,19 +17,13 @@
 <div id="title">
 <h1>New Job</h1>
 </div>
-	<div class="field">
-		<%=label_tag :Customer %>
-		<%= text_field_tag :text %>
-		<%=label_tag :Project %>
-		<%= text_field_tag :text %>
-		<%=label_tag :Hours %>
-		<%= number_field_tag :number,params[:number], :step => 'any' %>
-	</div>
-	<div class="field">
-		<br />
-		<%= label_tag :description %>
-		<%= text_field_tag :text,params[:text], :id => 'describe' %>
-	</div>
 </div>
+
+
+<%= render "jobs/table"%>
+
+<%-# this isnt a great thing to do with the job.new thing but shoudl be fine(maybe cause of an error) -%>
+<%= render "jobs/form", job:Job.new%>
+
 
 

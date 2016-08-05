@@ -3,7 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #articles .calendar{
 	border-collapse: collapse;
-	width: 45%;
+	width: 47%;
+	position: absolute;
+	left: 0%;
 	td,th{
 		font-family: "Lucida Grande", arial,helvetica,sans-serif;
 		font-size: 10px;
@@ -13,7 +15,7 @@
 	}
 
 	th{
-		background: #DDD;
+		background: #FF0554;
 		color: #666;
 		text-align: center;
 		width: 14.28571422857143%;
@@ -21,16 +23,16 @@
 	}
 
 	td {
-		background: #FFF;
+		background: #D1F0F7;
 		color: #777;
-		height: 142px;
+		height: 145px;
 		vertical-align: top;
 		font-size: 16px;
 
 	}
 
 	.notmonth {color: #CCC;}
-	.today {background-color: #D7F2FF}
+	.today {background-color: #6BE2F2}
 
 }
 
@@ -68,11 +70,11 @@
 #add-new-job{
 	border-radius: 8px;
 	position: absolute;
-	left: 45%;
-	top: 79.2%;
-	background-color: #33ccff;
-	border-color: #00bfff;
-	width: 55%;
+	left: 47%;
+	top: 79.9%;
+	background-color: #614BCC;
+	border-color: #F2636A;
+	width: 53%;
 	height: 20%;
 }
 
@@ -81,5 +83,67 @@
 	height: 50px;
 }
 
+#cust-box{
+	position: absolute;
+	left: 53.5%;
+	top: 85%;
+}
 
-html, body { background: #009933; }
+#cust-tag{
+	position: absolute;
+	left: 47%;
+	top: 85%;
+	font-size: 25px;
+}
+
+#project-box{
+	position: absolute;
+	left: 67.8%;
+	top: 85%;
+}
+
+#project-tag{
+	position: absolute;
+	left: 63%;
+	top: 85%;
+	font-size: 25px;
+}
+
+#hours-box{
+	position: absolute;
+	left: 81%;
+	top: 85%;
+}
+
+#hours-tag{
+	position: absolute;
+	left: 77%;
+	top: 85%;
+	font-size: 25px;
+}
+
+#description-box{
+	position: absolute;
+	left: 60.4%;
+	top: 92%;
+}
+
+#description-tag{
+	position: absolute;
+	left: 47%;
+	top: 92%;
+	font-size: 45px;
+}
+
+#submit-button{
+	position: absolute;
+	left: 70%;
+	top: 92%;
+}
+
+#job-table{
+	position: absolute;
+	left: 48%;
+}
+
+html, body { background: #057F9E; }
