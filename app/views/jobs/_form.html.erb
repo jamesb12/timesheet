@@ -38,8 +38,13 @@
     <div class="field" id="description-box">
     <%= f.text_field :description %>
     </div>
+    <%-# this seems like an awful way of going it but shouldnt cause any errors or anything(talking bout that date_field) -%>
+     <div class="field" id="date-box">
+    <%= f.date_field :date,:value => @date,style: "#{'display:none'}" %>
+    </div>   
 
     <div id="submit-button">
     <%= f.submit "Add Job" %>
     </div>
 <% end %>
+

@@ -5,6 +5,7 @@ class CreateJobs < ActiveRecord::Migration[5.0]
       t.string :project
       t.decimal :hours
       t.text :description
+      t.string :date
 
       t.timestamps
     end
