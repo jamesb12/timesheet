@@ -1,13 +1,26 @@
-<div id="title">
-<h1>Admin Page</h1>
-</div>
-
 <div id="job-table">
 <table>
 <tr>
 	<th>Customer</th>
 </tr>
+<% @test_for_job_count = 0 %>
 <% @jobloop = Job.all %>
+
+<% @counter = 0 %>
+<% @cust_counter = 0 %>
+
+<% @jobloop.each do |p| %>
+<% @counter = @counter + 1 %>
+<%= @jobs_cust = Array.new(1, p.customer) %><br />
+<% end %>
+<%if @jobs_cust.detect{|e| @jobs_cust.count(e) > 0} %>
+<%= @jobs_cust.detect{|e| @jobs_cust.count(e) > 0} %>
+<% end %>
+
+<% h = Hash.new(0) %>
+<% if ['a','b','b','c'].each{ |e| h[e] += 1 } %>
+	<%= h['b'] %>
+<% end %>
 
 	<% @jobloop.each do |u| %>
 		<tr>
