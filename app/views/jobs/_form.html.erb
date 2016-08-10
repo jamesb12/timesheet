@@ -10,12 +10,26 @@
       </ul>
     </div>
   <% end %>
+<% h = Hash.new(0) %>
+<% @jobers = Job.all %>
+<% @jobcounter = 0 %>
+
+<% @jobers.each do |p| %>
+  <%  @jobcounter = @jobcounter +1 %>
+  <% [p.customer].each{ |e| h[e] += 1 } %>
+  <% if h[p.customer] > 1 %>
+  <% h.delete(p.customer) %>
+  <% end %>
+<% end %>
+
+
+
 
     <div class="field" id="cust-tag">
     <%= f.label :Customer %>
     </div>
     <div class="field" id="cust-box">
-    <%= f.text_field :customer %>
+    <%= f.select :customer,options_for_select((0..(@jobcounter-1)).map {|i| [@jobers[i].customer,@jobers[i].customer] }) %>
     </div>
 
     <div class="field" id="project-tag">

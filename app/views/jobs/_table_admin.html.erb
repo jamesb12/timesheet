@@ -2,6 +2,7 @@
 <table>
 <tr>
 	<th>Customer</th>
+	<th>projects</th>
 </tr>
 <% @test_for_job_count = 0 %>
 <% @jobloop = Job.all %>
@@ -9,29 +10,43 @@
 <% @counter = 0 %>
 <% @cust_counter = 0 %>
 
-<% @jobloop.each do |p| %>
-<% @counter = @counter + 1 %>
-<%= @jobs_cust = Array.new(1, p.customer) %><br />
-<% end %>
-<%if @jobs_cust.detect{|e| @jobs_cust.count(e) > 0} %>
-<%= @jobs_cust.detect{|e| @jobs_cust.count(e) > 0} %>
-<% end %>
+<% #--creates new hash,fills hash with values,searches for dupes,print values/delete dupes %>
 
 <% h = Hash.new(0) %>
-<% if ['a','b','b','c'].each{ |e| h[e] += 1 } %>
-	<%= h['b'] %>
+
+<% @jobloop.each do |p| %>
+<% @counter = @counter + 1 %>
+<% if [p.customer].each{ |e| h[e] += 1 } %>
+
+
+<% end %>
 <% end %>
 
 	<% @jobloop.each do |u| %>
 		<tr>
+			<% if h[u.customer] == 1 %>
 			<td><%= link_to u.customer,job_path(u)%></td>
-			<td><%= u.customer %></td>
-			<td><%= link_to 'Edit', edit_job_path(u) %></td>
-			<td id="test_column"> test</td>
-        	<td><%= link_to 'Destroy', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-			<td><%= u.project %></td>
+			<% end %>
+			<% if h[u.customer] > 1 %>
+			<td><%= link_to u.customer,job_path(u)%></td>
+			<% h.delete(u.customer) %>
+			<% end %>
+
+
 		</tr>
 	<% end %>
 
+
 </table>
 </div>
+
+<table>
+<th>Users</th>
+<% @test = User.all %>
+
+<% @test.each do |y| %>
+<tr><td><%= y.email %></td></tr>
+<% end %>
+
+
+</table>

@@ -5,6 +5,11 @@ class UsersController < ApplicationController
 		@user = User.new
 	end
 
+	def index
+    @users = User.all
+	end	
+
+
 	def user_params
       params.require(:user).permit(:email, :password, :password_confirmation)
     end
