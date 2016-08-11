@@ -7,15 +7,13 @@
 <% @test_for_job_count = 0 %>
 <% @jobloop = Job.all %>
 
-<% @counter = 0 %>
-<% @cust_counter = 0 %>
+
 
 <% #--creates new hash,fills hash with values,searches for dupes,print values/delete dupes %>
 
 <% h = Hash.new(0) %>
 
 <% @jobloop.each do |p| %>
-<% @counter = @counter + 1 %>
 <% if [p.customer].each{ |e| h[e] += 1 } %>
 
 

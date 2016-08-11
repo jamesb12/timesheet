@@ -1,3 +1,4 @@
+
 <div id="title">
 <h1>Admin Page</h1>
 </div>
@@ -7,25 +8,28 @@
 <tr>
 	<th>Customer</th>
 	<th>Projects</th>
+	<th><%= link_to "[Add Customer]" %></th>
 </tr>
 <% @test_for_job_count = 0 %>
 <% @jobloop = Job.all %>
-
 <% @counter = 0 %>
 <% @cust_counter = 0 %>
 
 <% #--creates new hash,fills hash with values,searches for dupes,print values/delete dupes %>
 
 
+
+
 <% h = Hash.new(0) %>
 
 <% @jobloop.each do |p| %>
-<% @counter = @counter + 1 %>
+<% @counter += 1 %>
 <% [p.customer].each{ |e| h[e] += 1 } %>
+
+
 
 <% end %>
 	<% @projecterino = false %>
-
 
 	<% @jobloop.each do |u| %>
 		<tr>
@@ -42,8 +46,16 @@
 			<% end %>
 
 			<% if h[u.customer] > 1 %>
-			<td><%= link_to u.customer,job_path(u)%></td>
-			<% h.delete(u.customer) %>
+				<% if h[u.customer] != 567 %>
+					<td><%= link_to u.customer,job_path(u)%></td>
+				<% end %>
+				<td> </td>
+								
+				
+				<% h[u.customer] = 567 %>
+			<% end %>
+			<% if @job.customer == u.customer %>
+			<td><%= u.project %></td>
 			<% end %>
 		</tr>
 	<% end %>
@@ -53,8 +65,10 @@
 </div>
 
 
+
 <table>
 <th>Users</th>
+
 <% @test = User.all %>
 
 <% @test.each do |y| %>

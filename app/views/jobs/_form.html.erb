@@ -13,23 +13,73 @@
 <% h = Hash.new(0) %>
 <% @jobers = Job.all %>
 <% @jobcounter = 0 %>
+<% @max_cust = 0 %>
+
+<% @jobers.each do |k| %>
+<% @max_cust += 1 %>
+<% end %>
+<% @test = Array.new(@max_cust) %>
+
+
 
 <% @jobers.each do |p| %>
-  <%  @jobcounter = @jobcounter +1 %>
+  <% @test.insert(@jobcounter,p.customer) %>
   <% [p.customer].each{ |e| h[e] += 1 } %>
   <% if h[p.customer] > 1 %>
   <% h.delete(p.customer) %>
-  <% end %>
+  <% @test.each do |l| %>
+    <% if l == p.customer %>
+      <% @test.delete(l) %>
+      <% @test.unshift(l) %>
+    <% end %>
+  <% end %> 
+
+
+<% @jobers.each do |p| %>
+
+<% if [p.customer].each{ |e| h[e] += 1 } %>
+
+<% end %>
 <% end %>
 
 
+  <% end %>
+    <% @jobcounter = @jobcounter +1 %>
+<% end %>
 
+<% @counter_2 = 0 %>
+
+<% @test.each do |element| %>
+
+<% if element.nil? %>
+
+
+<% else %>
+ <% @counter_2 += 1 %>
+
+<% end %>
+
+<% end %>
+
+<% @tests = 0 %>
+
+<% @array_2 = Array.new(@counter_2 - 1) %>
+<% @test.each do |element| %>
+
+<% if element.nil? %>
+
+
+<% else %>
+ <% @array_2.insert(@tests,element) %>
+ <% @tests += 1 %>
+<% end %>
+<% end %>
 
     <div class="field" id="cust-tag">
     <%= f.label :Customer %>
     </div>
     <div class="field" id="cust-box">
-    <%= f.select :customer,options_for_select((0..(@jobcounter-1)).map {|i| [@jobers[i].customer,@jobers[i].customer] }) %>
+    <%= f.select :customer,options_for_select((@array_2.each).map {|i| [i,i] }) %>
     </div>
 
     <div class="field" id="project-tag">
