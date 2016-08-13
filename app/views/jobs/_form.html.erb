@@ -19,8 +19,7 @@
 <% @max_cust += 1 %>
 <% end %>
 <% @test = Array.new(@max_cust) %>
-
-
+<% @test_alt = Array.new(@max_cust) %>
 
 <% @jobers.each do |p| %>
   <% @test.insert(@jobcounter,p.customer) %>
@@ -74,12 +73,25 @@
  <% @tests += 1 %>
 <% end %>
 <% end %>
+<% @array_counter = 0 %>
+
+    <% @array_2.each do %>
+    <% @array_counter += 1 %>
+    <% end %>
+    <% @array_counter = (@array_counter+1)/2 %>
+    <% @array_counter %>
+    <% @array_final = Array.new %>
+    <% (0..@array_counter-1).each do |i| %>
+    <% @array_final.push(@array_2.at(i)) %>
+    <% end %>
+ 
+
 
     <div class="field" id="cust-tag">
     <%= f.label :Customer %>
     </div>
     <div class="field" id="cust-box">
-    <%= f.select :customer,options_for_select((@array_2.each).map {|i| [i,i] }) %>
+    <%= f.select :customer,options_for_select((@array_final.each).map {|i| [i,i] }),:'data-remote' => 'true', :'data-url' => url_for(:controller => 'jobs', :action => 'submit_customer', format: 'js') %>
     </div>
 
     <div class="field" id="project-tag">
@@ -110,5 +122,7 @@
     <div id="submit-button">
     <%= f.submit "Add Job" %>
     </div>
+
+
 <% end %>
 

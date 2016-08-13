@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-	before_filter :authorize, only:[:edit, :update]
   def new
   end
 
@@ -7,6 +6,8 @@ def destroy
 	session[:user_id] = nil
 	redirect_to root_url
 end
+
+
 
 
 

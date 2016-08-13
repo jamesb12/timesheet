@@ -18,8 +18,7 @@
       <%= link_to "Add User", signup_path %><br />
       <% unless current_page?(jobs_path) %>
       <%= link_to "admin page", jobs_path %>    
-      <% end %>  
-      <% if current_page?(jobs_path) %>
+      <% else %>  
       <%= link_to "home page", home_index_path %>    
       <% end %>        
   		<% flash.each do |name,msg| %>

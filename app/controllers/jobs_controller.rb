@@ -17,6 +17,12 @@ class JobsController < ApplicationController
     @job = Job.new
   end
 
+before_filter :authenticate 
+
+def authenticate
+  redirect_to "localhost:3000" unless current_user.present?
+end
+
   # GET /jobs/1/edit
   def edit
   end
@@ -27,7 +33,7 @@ class JobsController < ApplicationController
     @job = Job.new(job_params)
     respond_to do |format|
       if @job.save
-        format.html { redirect_to home_index_path, notice: 'Job was successfully created.' }
+        format.html { redirect_to home_index_path }
         format.json { render :show, status: :created, location: @job }
       else
         format.html { render :new }
@@ -39,9 +45,10 @@ class JobsController < ApplicationController
   # PATCH/PUT /jobs/1
   # PATCH/PUT /jobs/1.json
   def update
+    @job = Job.where("job_id = ?",params[:customer])
     respond_to do |format|
       if @job.update(job_params)
-        format.html { redirect_to @job, notice: 'Job was successfully updated.' }
+        format.html { redirect_to @job }
         format.json { render :show, status: :ok, location: @job }
       else
         format.html { render :edit }
@@ -55,7 +62,7 @@ class JobsController < ApplicationController
   def destroy
     @job.destroy
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Job was successfully destroyed.' }
+      format.html { redirect_to :back }
       format.json { head :no_content }
     end
   end
