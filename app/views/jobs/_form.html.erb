@@ -1,0 +1,128 @@
+<%= form_for(job) do |f| %>
+  <% if job.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(job.errors.count, "error") %> prohibited this job from being saved:</h2>
+
+      <ul>
+      <% job.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% h = Hash.new(0) %>
+<% @jobers = Job.all %>
+<% @jobcounter = 0 %>
+<% @max_cust = 0 %>
+
+<% @jobers.each do |k| %>
+<% @max_cust += 1 %>
+<% end %>
+<% @test = Array.new(@max_cust) %>
+<% @test_alt = Array.new(@max_cust) %>
+
+<% @jobers.each do |p| %>
+  <% @test.insert(@jobcounter,p.customer) %>
+  <% [p.customer].each{ |e| h[e] += 1 } %>
+  <% if h[p.customer] > 1 %>
+  <% h.delete(p.customer) %>
+  <% @test.each do |l| %>
+    <% if l == p.customer %>
+      <% @test.delete(l) %>
+      <% @test.unshift(l) %>
+    <% end %>
+  <% end %> 
+
+
+<% @jobers.each do |p| %>
+
+<% if [p.customer].each{ |e| h[e] += 1 } %>
+
+<% end %>
+<% end %>
+
+
+  <% end %>
+    <% @jobcounter = @jobcounter +1 %>
+<% end %>
+
+<% @counter_2 = 0 %>
+
+<% @test.each do |element| %>
+
+<% if element.nil? %>
+
+
+<% else %>
+ <% @counter_2 += 1 %>
+
+<% end %>
+
+<% end %>
+
+<% @tests = 0 %>
+
+<% @array_2 = Array.new(@counter_2 - 1) %>
+<% @test.each do |element| %>
+
+<% if element.nil? %>
+
+
+<% else %>
+ <% @array_2.insert(@tests,element) %>
+ <% @tests += 1 %>
+<% end %>
+<% end %>
+<% @array_counter = 0 %>
+
+    <% @array_2.each do %>
+    <% @array_counter += 1 %>
+    <% end %>
+    <% @array_counter = (@array_counter+1)/2 %>
+    <% @array_counter %>
+    <% @array_final = Array.new %>
+    <% (0..@array_counter-1).each do |i| %>
+    <% @array_final.push(@array_2.at(i)) %>
+    <% end %>
+ 
+
+
+    <div class="field" id="cust-tag">
+    <%= f.label :Customer %>
+    </div>
+    <div class="field" id="cust-box">
+    <%= f.select :customer,options_for_select((@array_final.each).map {|i| [i,i] }),:'data-remote' => 'true', :'data-url' => url_for(:controller => 'jobs', :action => 'submit_customer', format: 'js') %>
+    </div>
+
+    <div class="field" id="project-tag">
+    <%= f.label :Project %>
+    </div>
+    <div class="field" id="project-box">
+    <%= f.text_field :project %>
+    </div>
+
+    <div class="field" id="hours-tag">
+    <%= f.label :Hours %>
+    </div>
+    <div class="field" id="hours-box">
+    <%= f.number_field :hours,:class=>'text_field',:step=>'any' %>
+    </div>
+
+    <div class="field" id="description-tag">
+    <%= f.label :Description %>
+    </div>
+    <div class="field" id="description-box">
+    <%= f.text_field :description %>
+    </div>
+    <%-# this seems like an awful way of going it but shouldnt cause any errors or anything(talking bout that date_field) -%>
+     <div class="field" id="date-box">
+    <%= f.date_field :date,:value => @date,style: "#{'display:none'}" %>
+    </div>   
+
+    <div id="submit-button">
+    <%= f.submit "Add Job" %>
+    </div>
+
+
+<% end %>
+

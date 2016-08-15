@@ -1,31 +1,42 @@
 <div id="title">
 <h1>Your Jobs</h1>
 </div>
+
+
+
+<%-#look at that code curve :0 %>
 <h2 id="month">
 <%=link_to "<", date: @date.prev_month %>
 <%= @date.strftime("%B %Y") %>
 <%=link_to ">", date: @date.next_month %></h2>
 	<div id="articles">
 		<%= calendar @date do |date| %>
-			<%= date.day %>
+			<% @temp_hours = 0 %>
+			<% @job_counter = 0 %>
+			<%=link_to date.day,date: date %>
+			<% if Job.find_by(date: date) %>
+				<% @jobloop = Job.where(date: date) %>
+				<% @jobloop.each do |u| %>
+				<% @job_counter = @job_counter +1 %>
+				<% @temp_hours = @temp_hours + u.hours %>
+				<% end %>
+					<ul>
+					<li>jobs:<%= @job_counter %></li>
+					<li>hours:<%= @temp_hours %></li>
+				</ul>
+			<% end %>
 		<% end %>
 <div id="add-new-job">
 <div id="title">
 <h1>New Job</h1>
 </div>
-	<div class="field">
-		<%=label_tag :Customer %>
-		<%= text_field_tag :text %>
-		<%=label_tag :Project %>
-		<%= text_field_tag :text %>
-		<%=label_tag :Hours %>
-		<%= number_field_tag :number,params[:number], :step => 'any' %>
-	</div>
-	<div class="field">
-		<br />
-		<%= label_tag :description %>
-		<%= text_field_tag :text,params[:text], :id => 'describe' %>
-	</div>
 </div>
+
+
+<%= render "jobs/table"%>
+
+<%-# this isnt a great thing to do with the job.new thing but should be fine(maybe cause of an error) -%>
+<%= render "jobs/form", job:Job.new, locals: {datez: @date}%>
+
 
 
