@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new(user_params)
 		if @user.save
-			redirect_to root_url, notice: "thx for signing up squeezer"
+			redirect_to home_index_path, notice: "thx for signing up squeezer"
 		else
 			render "new"
 		end
