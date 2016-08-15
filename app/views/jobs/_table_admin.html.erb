@@ -1,9 +1,33 @@
+
+<%= form_for(Job.new) do |f| %>
+  <% if Job.new.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(job.errors.count, "error") %> prohibited this job from being saved:</h2>
+
+      <ul>
+      <% Job.new.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+<div id="job-table">
+<%= f.date_field :date,:value => '06/30/2016 00:00',style: "#{'display:none'}" %>
+<%= f.text_field :project,:value => ' ',style: "#{'display:none'}" %>
+<%= f.number_field :hours,:value => 0,:class=>'text_field',:step=>'any',style: "#{'display:none'}" %>
 <div id="job-table">
 <table>
 <tr>
 	<th>Customer</th>
-	<th>projects</th>
+	<th><%= f.text_field :customer %></th>
+    <th><%= f.submit "Add Customer" %></th>
+    <th>projects</th>    
+	<th><%= f.text_field :customer %></th>
+    <th><%= f.submit "Add Project" %></th>    
 </tr>
+
 <% @test_for_job_count = 0 %>
 <% @jobloop = Job.all %>
 
@@ -22,6 +46,7 @@
 <% end %>
 
 	<% @jobloop.each do |u| %>
+
 		<tr>
 			<% if h[u.customer] == 1 %>
 			<td><%= link_to u.customer,job_path(u)%></td>
@@ -36,7 +61,7 @@
 	<% end %>
 
 
-</table>
+
 </div>
 
 <table>
@@ -49,3 +74,4 @@
 
 
 </table>
+<% end %>
