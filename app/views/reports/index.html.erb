@@ -1,3 +1,4 @@
+
 <div id="job-table">
 <table>
 <tr>
@@ -10,9 +11,11 @@
 <% @total_hours = 0%>
 <% @jobloop = Job.all %>
 Sort by date:
-<input type="checkbox" name="vehicle" value="Bike">
-<%= date_field :date,:value => '06/30/2016 00:00'%>
+<%= check_box_tag "yo", 1, {:checked => "true"}  %>
+<%= date_field("user", "date",value: @date) %>
+<%= check_box%>
 <button type="button">sort</button>
+ 
   <% @jobloop.each do |u| %>
     <tr>
       <% @total_hours = @total_hours + u.hours %>
@@ -22,12 +25,14 @@ Sort by date:
       <td><%= u.description %></td>
       <td><%= u.date %></td>
       <td><%= link_to 'Edit', edit_job_path(u) %></td>
-          <td><%= link_to 'Destroy', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Destroy', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
+
   <tr>
   <td>total hours</td>
   <td><%= @total_hours %></td>
   </tr>
 </table>
 </div>
+

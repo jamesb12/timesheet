@@ -5,12 +5,16 @@ class ReportsController < ApplicationController
   # GET /reports.json
   def index
     @reports = Report.all
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    
+    
   end
 
   # GET /reports/1
   # GET /reports/1.json
   def show
   end
+
 
   # GET /reports/new
   def new
@@ -20,6 +24,7 @@ class ReportsController < ApplicationController
   # GET /reports/1/edit
   def edit
   end
+
 
   # POST /reports
   # POST /reports.json
