@@ -11,9 +11,9 @@
 <% @total_hours = 0%>
 <% @jobloop = Job.all %>
 Sort by date:
-<%= check_box_tag "yo", 1, {:checked => "true"}  %>
+<%= check_box("test", {checked: true}) %>
 <%= date_field("user", "date",value: @date) %>
-<%= check_box%>
+
 <button type="button">sort</button>
  
   <% @jobloop.each do |u| %>
