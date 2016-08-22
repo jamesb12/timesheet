@@ -10,95 +10,49 @@
       </ul>
     </div>
   <% end %>
-<% h = Hash.new(0) %>
-<% @jobers = Job.all %>
-<% @jobcounter = 0 %>
-<% @max_cust = 0 %>
 
-<% @jobers.each do |k| %>
-<% @max_cust += 1 %>
-<% end %>
-<% @test = Array.new(@max_cust) %>
-<% @test_alt = Array.new(@max_cust) %>
+    <% @jobers = Job.all %>
 
-<% @jobers.each do |p| %>
-  <% @test.insert(@jobcounter,p.customer) %>
-  <% [p.customer].each{ |e| h[e] += 1 } %>
-  <% if h[p.customer] > 1 %>
-  <% h.delete(p.customer) %>
-  <% @test.each do |l| %>
-    <% if l == p.customer %>
-      <% @test.delete(l) %>
-      <% @test.unshift(l) %>
+    <% @array_customers = Array.new() %>
+    <% @count_customers = 0 %>
+
+    <% @jobers.each do |j| %>
+    <% @array_customers.insert(@count_customers,j.customer) %>
+    <% @count_customers += 1 %>
     <% end %>
-  <% end %> 
+
+    <% @array_customers = @array_customers.uniq %>
+
+    <% @array_customers.reject!(&:empty?) %>
 
 
-<% @jobers.each do |p| %>
 
-<% if [p.customer].each{ |e| h[e] += 1 } %>
+    <% @array_projects = Array.new() %>
+    <% @count_projects = 0 %>
 
-<% end %>
-<% end %>
-
-
-  <% end %>
-    <% @jobcounter = @jobcounter +1 %>
-<% end %>
-
-<% @counter_2 = 0 %>
-
-<% @test.each do |element| %>
-
-<% if element.nil? %>
-
-
-<% else %>
- <% @counter_2 += 1 %>
-
-<% end %>
-
-<% end %>
-
-<% @tests = 0 %>
-
-<% @array_2 = Array.new(@counter_2 - 1) %>
-<% @test.each do |element| %>
-
-<% if element.nil? %>
-
-
-<% else %>
- <% @array_2.insert(@tests,element) %>
- <% @tests += 1 %>
-<% end %>
-<% end %>
-<% @array_counter = 0 %>
-
-    <% @array_2.each do %>
-    <% @array_counter += 1 %>
+    <% @jobers.each do |l| %>
+    <% @array_projects.insert(@count_projects,l.project) %>
+    <% @count_projects += 1 %>
     <% end %>
-    <% @array_counter = (@array_counter+1)/2 %>
-    <% @array_counter %>
-    <% @array_final = Array.new %>
-    <% (0..@array_counter-1).each do |i| %>
-    <% @array_final.push(@array_2.at(i)) %>
-    <% end %>
- 
+
+    <% @array_projects = @array_projects.uniq %>
+
+    <% @array_projects.reject!(&:empty?) %>
+
 
 
     <div class="field" id="cust-tag">
     <%= f.label :Customer %>
     </div>
     <div class="field" id="cust-box">
-    <%= f.select :customer,options_for_select((@array_final.each).map {|i| [i,i] }),:'data-remote' => 'true', :'data-url' => url_for(:controller => 'jobs', :action => 'submit_customer', format: 'js') %>
+    <%= f.select :customer,options_for_select((@array_customers.each).map {|i| [i,i] }),:'data-remote' => 'true', :'data-url' => url_for(:controller => 'jobs', :action => 'submit_customer', format: 'js') %>
     </div>
 
     <div class="field" id="project-tag">
     <%= f.label :Project %>
     </div>
     <div class="field" id="project-box">
-    <%= f.text_field :project %>
+    <%= f.select :project,options_for_select((@array_projects.each).map {|i| [i,i] }),:'data-remote' => 'true', :'data-url' => url_for(:controller => 'jobs', :action => 'submit_customer', format: 'js') %>
     </div>
 
     <div class="field" id="hours-tag">
@@ -114,7 +68,7 @@
     <div class="field" id="description-box">
     <%= f.text_field :description %>
     </div>
-    <%-# this seems like an awful way of going it but shouldnt cause any errors or anything(talking bout that date_field) -%>
+    <%-# this seems like an awful way of doing it but shouldnt cause any errors or anything(hiding date_field) -%>
      <div class="field" id="date-box">
     <%= f.date_field :date,:value => @date,style: "#{'display:none'}" %>
     </div>   

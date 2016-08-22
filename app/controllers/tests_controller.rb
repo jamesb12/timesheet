@@ -5,7 +5,6 @@ class TestsController < ApplicationController
   # GET /tests.json
   def index
     @tests = Test.all
-        @date = params[:date] ? Date.parse(params[:date]) : Date.today
   end
 
   # GET /tests/1
@@ -70,6 +69,6 @@ class TestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def test_params
-      params.require(:test).permit(:name, :job, :date)
+      params.require(:test).permit(:date_1, :date_2, :name, :user, :hours)
     end
 end

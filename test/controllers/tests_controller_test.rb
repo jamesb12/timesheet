@@ -17,7 +17,7 @@ class TestsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create test" do
     assert_difference('Test.count') do
-      post tests_url, params: { test: { date: @test.date, job: @test.job, name: @test.name } }
+      post tests_url, params: { test: { date_1: @test.date_1, date_2: @test.date_2, hours: @test.hours, name: @test.name, user: @test.user } }
     end
 
     assert_redirected_to test_url(Test.last)
@@ -34,7 +34,7 @@ class TestsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update test" do
-    patch test_url(@test), params: { test: { date: @test.date, job: @test.job, name: @test.name } }
+    patch test_url(@test), params: { test: { date_1: @test.date_1, date_2: @test.date_2, hours: @test.hours, name: @test.name, user: @test.user } }
     assert_redirected_to test_url(@test)
   end
 

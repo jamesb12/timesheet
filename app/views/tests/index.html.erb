@@ -26,7 +26,9 @@
 <% @total_hours = 0%>
 <% @jobloop = Job.all %>
 sort by date:
-<%= f.date_field :date %>
+<%= f.date_field :date_1 %>
+-
+<%= f.date_field :date_2 %>
 sort by customer:
 <%= f.text_field :name %>
 <%= f.submit "sort" %>
@@ -45,6 +47,7 @@ sort by customer:
   <% end %>
   <tr>
   <td>total hours</td>
+  <td></td>
   <td><%= @total_hours %></td>
   </tr>
 </table>

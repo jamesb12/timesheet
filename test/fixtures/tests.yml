@@ -1,11 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  date_1: 2016-08-22
+  date_2: 2016-08-22
   name: MyString
-  job: MyString
-  date: 2016-08-22
+  user: MyString
+  hours: 9.99
 
 two:
+  date_1: 2016-08-22
+  date_2: 2016-08-22
   name: MyString
-  job: MyString
-  date: 2016-08-22
+  user: MyString
+  hours: 9.99

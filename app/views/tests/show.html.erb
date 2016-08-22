@@ -24,12 +24,14 @@
 <% @total_hours = 0%>
 <% @jobloop = Job.all %>
 Sort by date:
-<%= f.date_field :date %>
+<%= f.date_field :date_1, :value => @test.date_1 %>
+-
+<%= f.date_field :date_2, :value => @test.date_2 %>
 sort by customer:
 <%= f.text_field :name %>
 <%= f.submit "sort" %>
   <% @jobloop.each do |u| %>
-  <% if @test.date.to_s == "" %>
+  <% if @test.date_1.to_s == "" %>
  <% if u.customer == @test.name.to_s %>
   <tr>
  <% @total_hours = @total_hours + u.hours %>
@@ -45,7 +47,9 @@ sort by customer:
 
 
   <% else %>
-  <% if u.date == @test.date.to_s %>
+<% if @test.name == "" %>
+ <% if u.date >= @test.date_1.to_s %>
+  <% if u.date <= @test.date_2.to_s %>
     <tr>
       <% @total_hours = @total_hours + u.hours %>
       <td><%= u.customer %></td>
@@ -57,6 +61,28 @@ sort by customer:
           <td><%= link_to 'Destroy', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
     <% end %>
+
+    <% end %>
+
+<% else %>
+
+  <% if u.date == @test.date_1.to_s %>
+  <% if u.customer == @test.name.to_s %>
+    <tr>
+      <% @total_hours = @total_hours + u.hours %>
+      <td><%= u.customer %></td>
+      <td><%= u.project %></td>
+      <td><%= u.hours %></td>
+      <td><%= u.description %></td>
+      <td><%= u.date %></td>
+      <td><%= link_to 'Edit', edit_job_path(u) %></td>
+          <td><%= link_to 'Destroy', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+    <% end %>
+
+<% end %>
+
 <% end %>
 
   <% end %>
