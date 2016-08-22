@@ -1,0 +1,54 @@
+<%= form_for(Test.new) do |f| %>
+  <% if Test.new.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(job.errors.count, "error") %> prohibited this job from being saved:</h2>
+
+      <ul>
+      <% Test.new.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+
+<div id="job-table">
+<table>
+<tr>
+  <th>Customer</th>
+  <th>Project</th>
+  <th>Hours</th>
+  <th>Description</th>
+  <th>Date</th> 
+</tr>
+<% @total_hours = 0%>
+<% @jobloop = Job.all %>
+sort by date:
+<%= f.date_field :date %>
+sort by customer:
+<%= f.text_field :name %>
+<%= f.submit "sort" %>
+  <% @jobloop.each do |u| %>
+    <tr>
+      <% @total_hours = @total_hours + u.hours %>
+      <td><%= u.customer %></td>
+      <td><%= u.project %></td>
+      <td><%= u.hours %></td>
+      <td><%= u.description %></td>
+      <td><%= u.date %></td>
+      <td><%= link_to 'Edit', edit_job_path(u) %></td>
+          <td><%= link_to 'Destroy', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+
+  <% end %>
+  <tr>
+  <td>total hours</td>
+  <td><%= @total_hours %></td>
+  </tr>
+</table>
+</div>
+
+<% end %>
+

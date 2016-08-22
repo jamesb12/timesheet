@@ -18,10 +18,10 @@
       <%= link_to "Add User", signup_path %><br />
       <% unless current_page?(jobs_path) %>
       <%= link_to "admin page", jobs_path %>  
-      <%= link_to "reports page", reports_path %>         
+      <%= link_to "reports page", tests_path %>         
       <% else %>  
       <%= link_to "home page", home_index_path %>   
-      <%= link_to "reports page", reports_path %>  
+      <%= link_to "reports page", tests_path %>  
       <% end %>        
   		<% flash.each do |name,msg| %>
   			<%= content_tag :div, msg, id: "flash_#{name}" %>
