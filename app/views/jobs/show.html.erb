@@ -11,95 +11,83 @@
     </div>
   <% end %>
 
-  <div id="title">
+<div id="title">
 <h1>Admin Page</h1>
 </div>
 
 <%= f.date_field :date,:value => '06/30/2016 00:00',style: "#{'display:none'}" %>
 <%= f.text_field :project,:value => ' ',style: "#{'display:none'}" %>
 <%= f.number_field :hours,:value => 0,:class=>'text_field',:step=>'any',style: "#{'display:none'}" %>
-<div id="job-table">
-<table>
+
+<table class="table">
+<thead class="bg-success">
 <tr>
-	<th>Customer</th>
-	<th><%= f.text_field :customer %></th>
-    <th><%= f.submit "Add Customer" %></th>
-    <th>projects</th>
-	<th><%= f.text_field :customer %></th>
-    <th><%= f.submit "Add Project" %></th>
+	<th width="8px">Customer <%= f.text_field :customer %><%= f.submit "Add Customer" %></th>   
+	<th></th>
 </tr>
-<% end %>
+</thead>
 <% @test_for_job_count = 0 %>
 <% @jobloop = Job.all %>
-<% @counter = 0 %>
-<% @cust_counter = 0 %>
-<% @first = false %>
+
+
+
+
 <% #--creates new hash,fills hash with values,searches for dupes,print values/delete dupes %>
-
-
-
-
 <% h = Hash.new(0) %>
-
 <% @jobloop.each do |p| %>
-<% @counter += 1 %>
-<% [p.customer].each{ |e| h[e] += 1 } %>
+<% if [p.customer].each{ |e| h[e] += 1 } %>
 <% end %>
-
-
-
-
-	<% @projecterino = false %>
+<% end %>
+<% #----------------------# %>
 
 	<% @jobloop.each do |u| %>
-		<tr>
+		<tr class="bg-info">
 			<% if h[u.customer] == 1 %>
-				<td><%= link_to u.customer,job_path(u)%></td>
-				<%if @projecterino == false %>
-					<% @jobloop.each do |o| %>
-						<% if o.customer == @job.customer %>
-							
-						<% end %>					
-					<% end %>
-				<% @projecterino = true %>
-				<% end %>
+			<td class="col-md-3"><%= link_to u.customer,job_path(u)%></td>
+			<td></td>
 			<% end %>
-
 			<% if h[u.customer] > 1 %>
-				<% if h[u.customer] != 567 %>
-					<td><%= link_to u.customer,job_path(u)%></td>
-
-				<% else %>
-							<% @first = true %>
-				<% end %>
-
-				<%if @first == true %>
-				<td> </td>
-				<% end %>
-				<% h[u.customer] = 567 %>
-			<% end %>
-			<% if @job.customer == u.customer %>
-			<td><%= u.project %></td>
+			<td class="col-md-3"><%= link_to u.customer,job_path(u)%></td>
+			<td></td>
+			<% h.delete(u.customer) %>
 			<% end %>
 		</tr>
 	<% end %>
 
+
+
 </table>
 
-</div>
+<table class="table">
+<thead class = "bg-success">
+<th>Projects <%= f.text_field :project %><%= f.submit "Add Project" %></th>
+</thead>
+
+<% @jobloop.each do |u| %>
+
+<% if u.customer == @job.customer %>
+<tr class="bg-info"><td><%= u.project %></td></tr>
+<% end %>
 
 
+<% end %>
 
-<table>
+
+</table>
+
+<table class="table">
+<thead class="bg-success">
 <th>Users</th>
-
+</thead>
 <% @test = User.all %>
 
 <% @test.each do |y| %>
-<tr><td><%= y.email %></td></tr>
+<tr class="bg-info"><td><%= y.email %></td></tr>
 <% end %>
 
 
 </table>
 
 
+
+<% end %>

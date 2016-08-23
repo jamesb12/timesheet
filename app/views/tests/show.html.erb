@@ -12,15 +12,19 @@
   <% end %>
 
 
-<div id="job-table">
-<table>
+<div id="reports-table">
+<table class="table">
+<thead class="bg-primary">
 <tr>
   <th>Customer</th>
   <th>Project</th>
   <th>Hours</th>
   <th>Description</th>
   <th>Date</th> 
+  <th></th>
+  <th></th>
 </tr>
+</thead>
 <% @total_hours = 0%>
 <% @jobloop = Job.all %>
 Sort by date:
@@ -33,7 +37,7 @@ sort by customer:
   <% @jobloop.each do |u| %>
   <% if @test.date_1.to_s == "" %>
  <% if u.customer == @test.name.to_s %>
-  <tr>
+  <tr class="bg-info">
  <% @total_hours = @total_hours + u.hours %>
       <td><%= u.customer %></td>
       <td><%= u.project %></td>
@@ -41,7 +45,7 @@ sort by customer:
       <td><%= u.description %></td>
       <td><%= u.date %></td>
       <td><%= link_to 'Edit', edit_job_path(u) %></td>
-          <td><%= link_to 'Destroy', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Destroy', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <% end %>
 
@@ -50,7 +54,7 @@ sort by customer:
 <% if @test.name == "" %>
  <% if u.date >= @test.date_1.to_s %>
   <% if u.date <= @test.date_2.to_s %>
-    <tr>
+    <tr class="bg-info">
       <% @total_hours = @total_hours + u.hours %>
       <td><%= u.customer %></td>
       <td><%= u.project %></td>
@@ -58,7 +62,7 @@ sort by customer:
       <td><%= u.description %></td>
       <td><%= u.date %></td>
       <td><%= link_to 'Edit', edit_job_path(u) %></td>
-          <td><%= link_to 'Destroy', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Destroy', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
     <% end %>
 
@@ -66,9 +70,10 @@ sort by customer:
 
 <% else %>
 
-  <% if u.date == @test.date_1.to_s %>
+ <% if u.date >= @test.date_1.to_s %>
+  <% if u.date <= @test.date_2.to_s %>
   <% if u.customer == @test.name.to_s %>
-    <tr>
+    <tr class="bg-info">
       <% @total_hours = @total_hours + u.hours %>
       <td><%= u.customer %></td>
       <td><%= u.project %></td>
@@ -76,11 +81,11 @@ sort by customer:
       <td><%= u.description %></td>
       <td><%= u.date %></td>
       <td><%= link_to 'Edit', edit_job_path(u) %></td>
-          <td><%= link_to 'Destroy', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Destroy', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
     <% end %>
     <% end %>
-
+    <% end %>
 <% end %>
 
 <% end %>
@@ -88,6 +93,7 @@ sort by customer:
   <% end %>
   <tr>
   <td>total hours</td>
+  <td></td>
   <td><%= @total_hours %></td>
   </tr>
 </table>

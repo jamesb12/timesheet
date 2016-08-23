@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html>
-  <head>
+
     <title>Timetrack</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-  </head>
-  <body>
-  	<div id="container">
+
+ 
   		<div id="user_header">
   			<% if current_user %>
           Logged in as jam@jam.com<br />
@@ -15,7 +13,6 @@
         <% end %>
 
   		</div>
-      <%= link_to "Add User", signup_path %><br />
       <% unless current_page?(jobs_path) %>
       <%= link_to "admin page", jobs_path %>  
       <%= link_to "reports page", tests_path %>         
@@ -28,6 +25,7 @@
   		<% end %>
 
     	<%= yield %>
-   	</div>
-  </body>
-</html>
+ 
+<style type="text/css">
+   body { background: #6699ff !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+</style>

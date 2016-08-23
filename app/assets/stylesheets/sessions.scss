@@ -16,17 +16,17 @@
 	}
 
 	th{
-		background: #FF0554;
+		background: #428bca;
 		color: #666;
 		text-align: center;
 		width: 14.28571422857143%;
-
+		height: 50px;
 	}
 
 	td {
 		background: #D1F0F7;
 		color: #777;
-		height: 145px;
+		height: 149px;
 		vertical-align: top;
 		font-size: 16px;
 
@@ -100,7 +100,7 @@
 #project-box{
 	position: absolute;
 	left: 69.8%;
-	top: 85%;
+	top: 86%;
 }
 
 #project-tag{
@@ -144,7 +144,7 @@
 
 #job-table{
 	position: absolute;
-	left: 48%;
+	left: 47%;
 }
 
 
@@ -154,4 +154,4 @@
 	top: 92%;
 }
 
-html, body { background: #057F9E; }
+html, body { background: #00b8e6; }

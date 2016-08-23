@@ -14,15 +14,19 @@
 
 
 
-<div id="job-table">
-<table class="table-bordered">
+<div id="reports-table">
+<table class="table">
+<thead class="bg-primary">
 <tr>
   <th>Customer</th>
   <th>Project</th>
   <th>Hours</th>
   <th>Description</th>
   <th>Date</th> 
+  <th></th>
+  <th></th>
 </tr>
+</thead>
 <% @total_hours = 0%>
 <% @jobloop = Job.all %>
 sort by date:
@@ -33,7 +37,7 @@ sort by customer:
 <%= f.text_field :name %>
 <%= f.submit "sort" %>
   <% @jobloop.each do |u| %>
-    <tr>
+    <tr class="bg-info">
       <% @total_hours = @total_hours + u.hours %>
       <td><%= u.customer %></td>
       <td><%= u.project %></td>

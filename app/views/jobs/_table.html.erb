@@ -1,22 +1,26 @@
 <div id="job-table">
-<table>
+<table class="table">
+<thead class="bg-primary">
 <tr>
 	<th>Customer</th>
 	<th>Project</th>
 	<th>Hours</th>
 	<th>Description</th>
 	<th>Date</th>	
+	<th></th>
+	<th></th>
 </tr>
+</thead>
 <% @jobloop = Job.where(date: @date) %>
 	<% @jobloop.each do |u| %>
-		<tr>
-			<td><%= u.customer %></td>
-			<td><%= u.project %></td>
-			<td><%= u.hours %></td>
-			<td><%= u.description %></td>
-			<td><%= u.date %></td>
-			<td><%= link_to 'Edit', edit_job_path(u) %></td>
-        	<td><%= link_to 'Destroy', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		<tr class="bg-info">
+			<td class="col-md-2"><div style="height: 28.49px;"><%= u.customer %></div></td>
+			<td class="col-md-2"><%= u.project %></td>
+			<td class="col-md-2"><%= u.hours %></td>
+			<td class="col-md-2"><%= u.description %></td>
+			<td class="col-md-2"><%= u.date %></td>
+			<td class="col-md-2"><%= link_to 'Edit', edit_job_path(u) %></td>
+        	<td class="col-md-2"><%= link_to 'Destroy', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 		</tr>
 	<% end %>
 </table>

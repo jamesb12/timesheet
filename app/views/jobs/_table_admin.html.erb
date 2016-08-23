@@ -13,21 +13,18 @@
   <% end %>
 
 
-<div id="job-table">
+
 <%= f.date_field :date,:value => '06/30/2016 00:00',style: "#{'display:none'}" %>
 <%= f.text_field :project,:value => ' ',style: "#{'display:none'}" %>
 <%= f.number_field :hours,:value => 0,:class=>'text_field',:step=>'any',style: "#{'display:none'}" %>
-<div id="job-table">
-<table>
-<tr>
-	<th>Customer</th>
-	<th><%= f.text_field :customer %></th>
-    <th><%= f.submit "Add Customer" %></th>
-    <th>projects</th>    
-	<th><%= f.text_field :project %></th>
-    <th><%= f.submit "Add Project" %></th>    
-</tr>
 
+<table class="table">
+<thead class="bg-success">
+<tr>
+	<th width="8px">Customer <%= f.text_field :customer %><%= f.submit "Add Customer" %></th> 
+	<th></th>  
+</tr>
+</thead>
 <% @test_for_job_count = 0 %>
 <% @jobloop = Job.all %>
 
@@ -35,43 +32,54 @@
 
 
 <% #--creates new hash,fills hash with values,searches for dupes,print values/delete dupes %>
-
 <% h = Hash.new(0) %>
-
 <% @jobloop.each do |p| %>
 <% if [p.customer].each{ |e| h[e] += 1 } %>
-
-
 <% end %>
 <% end %>
+<% #----------------------# %>
 
 	<% @jobloop.each do |u| %>
-
-		<tr>
+		<tr class="bg-info">
 			<% if h[u.customer] == 1 %>
-			<td><%= link_to u.customer,job_path(u)%></td>
+			<td class="col-md-3"><%= link_to u.customer,job_path(u)%></td>
+			<td></td>
 			<% end %>
 			<% if h[u.customer] > 1 %>
-			<td><%= link_to u.customer,job_path(u)%></td>
+			<td class="col-md-3"><%= link_to u.customer,job_path(u)%></td>
+			<td></td>
 			<% h.delete(u.customer) %>
 			<% end %>
-
-
 		</tr>
 	<% end %>
 
 
 
-</div>
+</table>
 
-<table>
-<th>Users</th>
+<table class="table">
+<thead class="bg-success">
+<th>Projects <%= f.text_field :project %><%= f.submit "Add Project" %></th>	
+</thead>
+
+
+</table>
+
+
+<table class="table">
+<thead class="bg-success">
+<th>Users (<%= link_to "Add User", signup_path %>)</th>
+
+</thead>
 <% @test = User.all %>
 
 <% @test.each do |y| %>
-<tr><td><%= y.email %></td></tr>
+<tr class="bg-info"><td><%= y.email %></td></tr>
 <% end %>
 
 
 </table>
+
+
+
 <% end %>
