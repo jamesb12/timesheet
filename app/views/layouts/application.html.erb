@@ -18,6 +18,7 @@
       <%= link_to "reports page", tests_path %>       
       <% elsif current_page?(root_path) %>
       <% #no links in login page #%>
+      <%= link_to "Add User", signup_path %>
       <% elsif current_page?(jobs_path) %>
       <%= link_to "home page", home_index_path %> <br /> 
       <%= link_to "reports page", tests_path %>  
