@@ -16,12 +16,20 @@
       <% if current_page?(home_index_path) %>
       <%= link_to "admin page", jobs_path %>  <br />
       <%= link_to "reports page", tests_path %>       
+      <% elsif current_page?(root_path) %>
+      <% #no links in login page #%>
+      <% elsif current_page?(jobs_path) %>
+      <%= link_to "home page", home_index_path %> <br /> 
+      <%= link_to "reports page", tests_path %>  
+      <% elsif %>
+      <%= link_to "home page", home_index_path %> <br /> 
+      <%= link_to "admin page", jobs_path %>  <br />
       <% else %>
       <%= link_to "home page", home_index_path %> <br /> 
       <%= link_to "admin page", jobs_path %>  <br />       
-      <%= link_to "reports page", tests_path %> 
+      <%= link_to "reports page", tests_path %>    
       <% end %>
-     
+
   		<% flash.each do |name,msg| %>
   			<%= content_tag :div, msg, id: "flash_#{name}" %>
   		<% end %>

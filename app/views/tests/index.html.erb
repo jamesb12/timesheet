@@ -52,6 +52,7 @@ sort by customer:
  <%= f.select :name,options_for_select((@array_customers.each).map {|i| [i,i] }),:'data-remote' => 'true', :'data-url' => url_for(:controller => 'jobs', :action => 'submit_customer', format: 'js') %>
 <%= f.submit "sort" %>
   <% @jobloop.each do |u| %>
+  <% if u.project != "" %>
     <tr class="bg-info">
       <% @total_hours = @total_hours + u.hours %>
       <td><%= u.customer %></td>
@@ -62,7 +63,7 @@ sort by customer:
       <td><%= link_to 'Edit', edit_job_path(u) %></td>
           <td><%= link_to 'Destroy', u, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
-
+    <% end %>
   <% end %>
   <tr>
   <td>total hours</td>

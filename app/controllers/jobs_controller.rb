@@ -33,7 +33,7 @@ end
     @job = Job.new(job_params)
     respond_to do |format|
       if @job.save
-        format.html { redirect_to home_index_path }
+        format.html { redirect_to jobs_path }
         format.json { render :show, status: :created, location: @job }
       else
         format.html { render :new }
