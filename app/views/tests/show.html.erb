@@ -12,6 +12,24 @@
   <% end %>
 
 
+    <% @jobers = Job.all %>
+
+    <% @array_customers = Array.new() %>
+    <% @count_customers = 0 %>
+
+    <% @jobers.each do |j| %>
+    <% @array_customers.insert(@count_customers,j.customer) %>
+    <% @count_customers += 1 %>
+    <% end %>
+
+    <% @array_customers = @array_customers.uniq %>
+
+    <% @array_customers.reject!(&:empty?) %>
+
+
+
+
+
 <div id="reports-table">
 <table class="table">
 <thead class="bg-primary">
@@ -32,8 +50,8 @@ Sort by date:
 -
 <%= f.date_field :date_2, :value => @test.date_2 %>
 sort by customer:
-<%= f.text_field :name %>
-<%= f.submit "sort" %>
+ <%= f.select :name,options_for_select((@array_customers.each).map {|i| [i,i] }),:'data-remote' => 'true', :'data-url' => url_for(:controller => 'jobs', :action => 'submit_customer', format: 'js') %>
+ <%= f.submit "sort" %>
   <% @jobloop.each do |u| %>
   <% if @test.date_1.to_s == "" %>
  <% if u.customer == @test.name.to_s %>

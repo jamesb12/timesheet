@@ -8,18 +8,20 @@
  
   		<div id="user_header">
   			<% if current_user %>
-          Logged in as jam@jam.com<br />
+          Logged in as <%= current_user.email %><br />
           <%= link_to "Log Out", logout_path %>
         <% end %>
 
   		</div>
-      <% unless current_page?(jobs_path) %>
-      <%= link_to "admin page", jobs_path %>  
-      <%= link_to "reports page", tests_path %>         
-      <% else %>  
-      <%= link_to "home page", home_index_path %>   
-      <%= link_to "reports page", tests_path %>  
-      <% end %>        
+      <% if current_page?(home_index_path) %>
+      <%= link_to "admin page", jobs_path %>  <br />
+      <%= link_to "reports page", tests_path %>       
+      <% else %>
+      <%= link_to "home page", home_index_path %> <br /> 
+      <%= link_to "admin page", jobs_path %>  <br />       
+      <%= link_to "reports page", tests_path %> 
+      <% end %>
+     
   		<% flash.each do |name,msg| %>
   			<%= content_tag :div, msg, id: "flash_#{name}" %>
   		<% end %>
