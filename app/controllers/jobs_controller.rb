@@ -75,6 +75,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:customer, :project, :hours, :description, :date)
+      params.require(:job).permit(:customer, :project, :hours, :description, :date, :userid)
     end
 end

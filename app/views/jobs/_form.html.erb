@@ -72,6 +72,11 @@
     <%= f.date_field :date,:value => @date,style: "#{'display:none'}" %>
     </div>   
 
+    <% @userid = User.all %>
+    <div class="field" id="date-box">
+     <%= f.select :userid,options_for_select((@userid.each).map {|i| [i.email,i.email] }),:'data-remote' => 'true', :'data-url' => url_for(:controller => 'jobs', :action => 'submit_customer', format: 'js') %>
+    </div>  
+
     <div id="submit-button">
     <%= f.submit "Add Job" %>
     </div>
